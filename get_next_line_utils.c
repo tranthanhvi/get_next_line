@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	find_newline(char *buffer) // return the index of the line
+int	find_newline(char *buffer)
 {
 	int	i;
 
@@ -44,4 +44,17 @@ char *extract_line(char *buffer)
 	}
 	line[i + 1] = '\0';
 	return (extract_line);
+}
+
+void	shift_buffer(char *buffer, int index)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[index + 1] != '\0')
+	{
+		buffer[i] = buffer[index + i + 1];
+		i++;
+	}
+	buffer[i] = '\0';
 }
