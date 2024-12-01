@@ -13,8 +13,8 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include <unistd.h> // for open() read() close() perror()
+# include <stdlib.h> // for malloc() free()
 
 
 char	*get_next_line(int fd);

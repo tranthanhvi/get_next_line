@@ -11,4 +11,8 @@
 /* ************************************************************************** */
 
 char	*get_next_line(int fd)
-{}
+{
+ // Read from file descriptor into a buffer
+ // Save left over data for subsequent calls (using static variable)
+ // Return a single line from the data
+}
