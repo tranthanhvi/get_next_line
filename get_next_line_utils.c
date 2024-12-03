@@ -28,12 +28,13 @@ int	find_newline(char *buffer)
 
 char *extract_line(char *buffer)
 {
-	char *line;
+	char *extracted_line;
 	int		newline_index;
 	int		i;
+	int		j;
 
 	newline_index = find_newline(buffer);
-	extracted_line = malloc(newline_index + 2) //+1 for \n and +1 for \0
+	extracted_line = malloc(newline_index + 2); //+1 for \n and +1 for \0
 	if (!extracted_line)
 		return (NULL);
 	i = 0;
@@ -42,8 +43,8 @@ char *extract_line(char *buffer)
 		extracted_line[j] = buffer[j];
 		j++;
 	}
-	line[i + 1] = '\0';
-	return (extract_line);
+	extracted_lineline[i + 1] = '\0';
+	return (extracted_line);
 }
 
 void	shift_buffer(char *buffer, int index)
@@ -51,6 +52,7 @@ void	shift_buffer(char *buffer, int index)
 	int	i;
 
 	i = 0;
+	j = 0;
 	while (buffer[index + 1] != '\0')
 	{
 		buffer[i] = buffer[index + i + 1];

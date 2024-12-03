@@ -10,9 +10,64 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 char	*get_next_line(int fd)
 {
  // Read from file descriptor into a buffer
  // Save left over data for subsequent calls (using static variable)
  // Return a single line from the data
+	static char	buffer[BUFFER_SIZE + 1];
+	char	temp[BUFFER_SIZE + 1];
+	int	bytes_read;
+	char *line;
+	int i;
+	int j;
+	
+	//Check for valid file descriptor and buffer size
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	// Keep reading until find a newline or EOF(end of file)
+	while (find_newline(buffer) == -1)
+	{
+		//Read data into the temp buffer
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (NULL);
+		if (bytes_read == 0) //EOF
+			break ;
+		temp[bytes_read] = '\0';
+		// Append the temp buffer to the static buffer
+		i = 0;
+		j = 0;
+		while (buffer[i] != '\0')
+			i++;
+		while (buffer[j] != '\0')
+			buffer[i++] = temp[j++];
+		buffer[i] = '\0';
+	}
+	if (buffer[0] == '\0')
+		return (NULL);
+	line = extract_line(buffer);
+	shift_buffer(buffer, find_newline(buffer));
+	return (line);
+}
+
+int	main()
+{
+	int	fd = open("test_file.txt", O_RDONLY);
+	char	*line;
+
+	if (fd < 0)
+	{
+		printf("Failed to open file.\n");
+		return (1);
+	}
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
 }

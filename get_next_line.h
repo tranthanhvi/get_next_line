@@ -15,8 +15,13 @@
 
 # include <unistd.h> // for open() read() close() perror()
 # include <stdlib.h> // for malloc() free()
-
+# include <stdio.h> // REMOVE THIS
 
 char	*get_next_line(int fd);
+int	find_newline(char *buffer);
+char *extract_line(char *buffer);
+void	shift_buffer(char *buffer, int index);
+
+
 
 #endif
