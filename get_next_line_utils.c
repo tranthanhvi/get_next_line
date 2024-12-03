@@ -38,12 +38,13 @@ char *extract_line(char *buffer)
 	if (!extracted_line)
 		return (NULL);
 	i = 0;
+	j = 0;
 	while (i < newline_index)
 	{
 		extracted_line[j] = buffer[j];
 		j++;
 	}
-	extracted_lineline[i + 1] = '\0';
+	extracted_line[i + 1] = '\0';
 	return (extracted_line);
 }
 
@@ -52,7 +53,6 @@ void	shift_buffer(char *buffer, int index)
 	int	i;
 
 	i = 0;
-	j = 0;
 	while (buffer[index + 1] != '\0')
 	{
 		buffer[i] = buffer[index + i + 1];

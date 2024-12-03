@@ -16,7 +16,12 @@
 # include <unistd.h> // for open() read() close() perror()
 # include <stdlib.h> // for malloc() free()
 # include <stdio.h> // REMOVE THIS
+# include <fcntl.h>
 
+
+# ifndef BUFFER_SIZE
+# 	define BUFFER_SIZE 42;
+# endif
 char	*get_next_line(int fd);
 int	find_newline(char *buffer);
 char *extract_line(char *buffer);
