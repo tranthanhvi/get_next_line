@@ -32,6 +32,7 @@ char	*get_next_line(int fd)
 	{
 		//Read data into the temp buffer
 		bytes_read = read(fd, temp, BUFFER_SIZE);
+		printf("Read bytes: %d\n", bytes_read);
 		if (bytes_read < 0)
 			return (NULL);
 		if (bytes_read == 0) //EOF
@@ -39,12 +40,13 @@ char	*get_next_line(int fd)
 		temp[bytes_read] = '\0';
 		// Append the temp buffer to the static buffer
 		i = 0;
-		j = 0;
 		while (buffer[i] != '\0')
 			i++;
-		while (buffer[j] != '\0')
+		j = 0;
+		while (temp[j] != '\0')
 			buffer[i++] = temp[j++];
 		buffer[i] = '\0';
+		printf("Buffer: %s\n", buffer);
 	}
 	if (buffer[0] == '\0')
 		return (NULL);
@@ -63,7 +65,9 @@ int	main()
 		printf("Failed to open file.\n");
 		return (1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	printf("File opened succesfully!\n");
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		printf("%s", line);
 		free(line);
