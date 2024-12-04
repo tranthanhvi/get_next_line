@@ -59,10 +59,12 @@ char	*get_next_line(int fd)
 
 int	main()
 {
-	int	fd = open("test_file.txt", O_RDONLY);
 	char	*line;
 
-	if (fd < 0)
+//fd for file case
+
+	/* if (fd < 0)
+	int	fd = open("test_file.txt", O_RDONLY);
 	{
 		printf("Failed to open file.\n");
 		return (1);
@@ -73,13 +75,21 @@ int	main()
 	{
 		printf("1st print: %s", line);
 		line = get_next_line(fd);
-		// printf("2nd print: %s", line);
-		// line = get_next_line(fd);
-		// printf("3rd print: %s", line);
-		// line = get_next_line(fd);
-
+		printf("2nd print: %s", line);
+		line = get_next_line(fd);
+		printf("3rd print: %s", line);
 		free(line);
 	}
-	close(fd);
+		close(fd);
+	 */
+
+// stdin case
+	printf("Please enter input (CTRL + C to end): \n");
+	while ((line = get_next_line(0)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+
 	return (0);
 }
