@@ -19,9 +19,9 @@
 # include <fcntl.h>
 
 
-// # ifndef BUFFER_SIZE
-// # 	define BUFFER_SIZE 150
-// # endif
+# ifndef BUFFER_SIZE
+# 	define BUFFER_SIZE 70
+# endif
 char	*get_next_line(int fd);
 int	find_newline(char *buffer);
 char *extract_line(char *buffer);

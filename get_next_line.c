@@ -49,11 +49,19 @@ char	*get_next_line(int fd)
 		while (temp[j] != '\0')
 			buffer[i++] = temp[j++];
 		buffer[i] = '\0';
-		printf("Buffer: %s\n", buffer);
+		// printf("Buffer: %s\n", buffer);
 	}
 	if (buffer[0] == '\0')
 		return (NULL);
+	printf("Buffer before extract_line: %s\n", buffer);
+
 	line = extract_line(buffer);
+	if (line == NULL)
+	{
+		printf("extract_line() returned NULL\n");
+    	return (NULL); //remove
+	}
+	printf("Line to be returned: %s\n", line); // remove
 	shift_buffer(buffer, find_newline(buffer));
 	// printf("find_newline returns: %d\n", find_newline(buffer)); //remove
 

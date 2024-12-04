@@ -28,24 +28,26 @@ int	find_newline(char *buffer)
 
 char *extract_line(char *buffer)
 {
-	char *extracted_line;
+	char *line;
 	int		newline_index;
 	int		i;
-	int		j;
 
 	newline_index = find_newline(buffer);
-	extracted_line = malloc(newline_index + 2); //+1 for \n and +1 for \0
-	if (!extracted_line)
+	if (newline_index == -1)
+		newline_index = strlen(buffer) - 1;
+	line = malloc(newline_index + 2); //+1 for \n and +1 for \0
+	if (!line)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (i < newline_index)
+	while (i < newline_index && buffer[i] != '\0')
 	{
-		extracted_line[j] = buffer[j];
-		j++;
+		line[i] = buffer[i];
+		i++;
 	}
-	extracted_line[i + 1] = '\0';
-	return (extracted_line);
+	line[i] = '\0';
+	
+	return (line);
+	 printf("Extracted line: %s\n", line); // Debug print
 }
 
 void	shift_buffer(char *buffer, int index)
