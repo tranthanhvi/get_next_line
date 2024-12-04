@@ -24,24 +24,18 @@ char	*get_next_line(int fd)
 	int i;
 	int j;
 	
-	//Check for valid file descriptor and buffer size
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 
-	// Keep reading until find a newline or EOF(end of file)
-	// printf("find_newline returns: %d\n", find_newline(buffer)); //remove
 	while (find_newline(buffer) == -1)
 	{
-		//Read data into the temp buffer
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-		// printf("Read bytes: %d\n", bytes_read); //remove
-		// printf("Buffer after reading: %s\n", buffer); //remove
+
 		if (bytes_read < 0)
 			return (NULL);
 		if (bytes_read == 0) //EOF
 			break ;
 		temp[bytes_read] = '\0';
-		// Append the temp buffer to the static buffer
 		i = 0;
 		while (buffer[i] != '\0')
 			i++;
@@ -49,22 +43,17 @@ char	*get_next_line(int fd)
 		while (temp[j] != '\0')
 			buffer[i++] = temp[j++];
 		buffer[i] = '\0';
-		// printf("Buffer: %s\n", buffer);
 	}
 	if (buffer[0] == '\0')
 		return (NULL);
-	printf("Buffer before extract_line: %s\n", buffer);
-
 	line = extract_line(buffer);
 	if (line == NULL)
 	{
 		printf("extract_line() returned NULL\n");
     	return (NULL); //remove
 	}
-	printf("Line to be returned: %s\n", line); // remove
+	// printf("Line to be returned: %s\n", line); // remove
 	shift_buffer(buffer, find_newline(buffer));
-	// printf("find_newline returns: %d\n", find_newline(buffer)); //remove
-
 	return (line);
 }
 
@@ -82,7 +71,13 @@ int	main()
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("%s", line);
+		printf("1st print: %s", line);
+		line = get_next_line(fd);
+		// printf("2nd print: %s", line);
+		// line = get_next_line(fd);
+		// printf("3rd print: %s", line);
+		// line = get_next_line(fd);
+
 		free(line);
 	}
 	close(fd);

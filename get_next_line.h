@@ -20,7 +20,7 @@
 
 
 # ifndef BUFFER_SIZE
-# 	define BUFFER_SIZE 70
+# 	define BUFFER_SIZE 11
 # endif
 char	*get_next_line(int fd);
 int	find_newline(char *buffer);

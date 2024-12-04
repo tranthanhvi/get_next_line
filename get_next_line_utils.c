@@ -39,7 +39,7 @@ char *extract_line(char *buffer)
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (i < newline_index && buffer[i] != '\0')
+	while (i <= newline_index && buffer[i] != '\0')
 	{
 		line[i] = buffer[i];
 		i++;
@@ -55,7 +55,13 @@ void	shift_buffer(char *buffer, int index)
 	int	i;
 
 	i = 0;
-	while (buffer[index + 1] != '\0')
+
+	if (index == -1)
+	{
+		buffer[0] = '\0';
+		return ;
+	}
+	while (buffer[index + i + 1] != '\0')
 	{
 		buffer[i] = buffer[index + i + 1];
 		i++;
