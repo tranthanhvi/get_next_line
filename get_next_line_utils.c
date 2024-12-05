@@ -47,7 +47,6 @@ char *extract_line(char *buffer)
 	line[i] = '\0';
 	
 	return (line);
-	 printf("Extracted line: %s\n", line); // Debug print
 }
 
 void	shift_buffer(char *buffer, int index)

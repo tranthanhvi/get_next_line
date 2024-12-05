@@ -49,10 +49,8 @@ char	*get_next_line(int fd)
 	line = extract_line(buffer);
 	if (line == NULL)
 	{
-		printf("extract_line() returned NULL\n");
-    	return (NULL); //remove
+    	return (NULL);
 	}
-	// printf("Line to be returned: %s\n", line); // remove
 	shift_buffer(buffer, find_newline(buffer));
 	return (line);
 }
@@ -60,11 +58,10 @@ char	*get_next_line(int fd)
 int	main()
 {
 	char	*line;
-
 //fd for file case
-
-	/* if (fd < 0)
 	int	fd = open("test_file.txt", O_RDONLY);
+
+	if (fd < 0)
 	{
 		printf("Failed to open file.\n");
 		return (1);
@@ -81,15 +78,14 @@ int	main()
 		free(line);
 	}
 		close(fd);
-	 */
+	
 
-// stdin case
-	printf("Please enter input (CTRL + C to end): \n");
+/* // stdin case
 	while ((line = get_next_line(0)) != NULL)
 	{
 		printf("%s", line);
 		free(line);
-	}
+	} */
 
 	return (0);
 }
