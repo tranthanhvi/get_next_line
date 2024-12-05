@@ -12,6 +12,43 @@
 
 #include "get_next_line.h"
 
+size_t	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (*str++)
+	{
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_strlcat(char *dst, char *src, size_t size)
+{
+	size_t	dlen;
+	size_t	slen;
+	size_t	i;
+	if ((!dst || !src) && size == 0)
+		return (0);
+	if (dst)
+		dlen = ft_strlen(dst);
+	else
+		dlen = 0;
+	slen = ft_strlen(src);
+	if (size <= dlen)
+		return (size + slen);
+	i = 0;
+	while (src[i] && (dlen + i < size - 1))
+	{
+		dst[dlen + i] = src[i];
+		i++;
+	}
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
+
+}
+
 int	find_newline(char *buffer)
 {
 	int	i;

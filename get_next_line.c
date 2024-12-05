@@ -14,47 +14,38 @@
 
 char	*get_next_line(int fd)
 {
- // Read from file descriptor into a buffer
- // Save left over data for subsequent calls (using static variable)
- // Return a single line from the data
 	static char	buffer[BUFFER_SIZE + 1];
-	char	temp[BUFFER_SIZE + 1];
-	int	bytes_read;
-	char *line;
-	int i;
-	int j;
-	
+	char		temp[BUFFER_SIZE + 1];
+	int			bytes_read;
+	char	*line;
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
 	while (find_newline(buffer) == -1)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-
 		if (bytes_read < 0)
 			return (NULL);
-		if (bytes_read == 0) //EOF
+		if (bytes_read == 0)
 			break ;
 		temp[bytes_read] = '\0';
-		i = 0;
-		while (buffer[i] != '\0')
-			i++;
-		j = 0;
-		while (temp[j] != '\0')
-			buffer[i++] = temp[j++];
-		buffer[i] = '\0';
+		// i = 0;
+		// while (buffer[i] != '\0')
+		// 	i++;
+		// j = 0;
+		// while (temp[j] != '\0')
+		// 	buffer[i++] = temp[j++];
+		// buffer[i] = '\0';
+		ft_strlcat(buffer, temp, sizeof(buffer));
 	}
 	if (buffer[0] == '\0')
 		return (NULL);
 	line = extract_line(buffer);
 	if (line == NULL)
-	{
-    	return (NULL);
-	}
+		return (NULL);
 	shift_buffer(buffer, find_newline(buffer));
 	return (line);
 }
-
 int	main()
 {
 	char	*line;

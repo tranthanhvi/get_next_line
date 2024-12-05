@@ -20,9 +20,11 @@
 
 
 # ifndef BUFFER_SIZE
-# 	define BUFFER_SIZE 11
+# 	define BUFFER_SIZE 75
 # endif
 char	*get_next_line(int fd);
+size_t	ft_strlcat(char *dst, char *src, size_t size);
+size_t	ft_strlen(char *str);
 int	find_newline(char *buffer);
 char *extract_line(char *buffer);
 void	shift_buffer(char *buffer, int index);
