@@ -48,6 +48,6 @@ char	*get_next_line(int fd)
 	if (!remaining[fd])
 		return (NULL);
 	line = extract_line(remaining[fd]);
-	remaining[fd] = save_remaining_buffer	(remaining[fd]);
+	remaining[fd] = save_remaining_buffer(remaining[fd]);
 	return (line);
 }
