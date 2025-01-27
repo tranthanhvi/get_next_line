@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: thantran <thantran@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 10:12:35 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/20 00:19:06 by ajordan-         ###   ########.fr       */
+/*   Created: 2025/01/27 21:49:17 by thantran          #+#    #+#             */
+/*   Updated: 2025/01/27 21:49:17 by thantran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

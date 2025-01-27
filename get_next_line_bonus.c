@@ -3,47 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: thantran <thantran@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 13:17:07 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/20 10:04:39 by ajordan-         ###   ########.fr       */
+/*   Created: 2025/01/27 21:49:38 by thantran          #+#    #+#             */
+/*   Updated: 2025/01/27 21:49:38 by thantran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 
-*	GET_NEXT_LINE
-*	-------------
-*	DESCRIPTION
-*	This function takes an opened file descriptor and returns its next line.
-*	This function has undefined behavior when reading from a binary file.
-*	PARAMETERS
-*	#1. A file descriptor 
-*	RETURN VALUES
-*	If successful, get_next_line returns a string with the full line ending in
-*	a line break (`\n`) when there is one. 
-*	If an error occurs, or there's nothing more to read, it returns NULL.
-*	----------------------------------------------------------------------------
-*	AUXILIARY FUNCTIONS
-*	-------------------
-*	READ_TO_LEFT_STR
-*	-----------------
-*	DESCRIPTION
-*	Takes the opened file descriptor and saves on a "buff" variable what readed
-*	from it. Then joins it to the cumulative static variable for the persistence
-*	of the information.
-*	PARAMETERS
-*	#1. A file descriptor.
-*	#2. The pointer to the cumulative static variable from previous runs of
-*	get_next_line.
-*	RETURN VALUES
-*	The new static variable value with buffer joined for the persistence of the info,
-*	or NULL if error.
-*/
-
 #include "get_next_line_bonus.h"
 #include <unistd.h>
-//#include <stdio.h>
-//#include <fcntl.h>
 
 char	*read_and_append(int fd, char *remaining)
 {
@@ -83,34 +51,3 @@ char	*get_next_line(int fd)
 	remaining[fd] = save_remaining_buffer	(remaining[fd]);
 	return (line);
 }
-
-/*int	main(void)
-{
-	char	*line;
-	int		i;
-	int		fd1;
-	int		fd2;
-	int		fd3;
-
-	fd1 = open("tests/test.txt", O_RDONLY);
-	fd2 = open("tests/test2.txt", O_RDONLY);
-	fd3 = open("tests/test3.txt", O_RDONLY);
-	i = 1;
-	while (i < 7)
-	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		i++;
-	}
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
-}*/
