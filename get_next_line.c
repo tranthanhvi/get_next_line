@@ -13,7 +13,7 @@
 #include "get_next_line.h"
 #include <unistd.h>
 
-char	*read_and_append(int fd, char *left_str)
+char	*read_and_append(int fd, char *remaining)
 {
 	char	*buff;
 	int		rd_bytes;
@@ -22,7 +22,7 @@ char	*read_and_append(int fd, char *left_str)
 	if (!buff)
 		return (NULL);
 	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
+	while (!ft_strchr(remaining, '\n') && rd_bytes != 0)
 	{
 		rd_bytes = read(fd, buff, BUFFER_SIZE);
 		if (rd_bytes == -1)
@@ -31,23 +31,23 @@ char	*read_and_append(int fd, char *left_str)
 			return (NULL);
 		}
 		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
+		remaining = ft_strjoin(remaining, buff);
 	}
 	free(buff);
-	return (left_str);
+	return (remaining);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*left_str;
+	static char	*remaining;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	left_str = read_and_append(fd, left_str);
-	if (!left_str)
+	remaining = read_and_append(fd, remaining);
+	if (!remaining)
 		return (NULL);
-	line = extract_line(left_str);
-	left_str = save_remaining_buffer(left_str);
+	line = extract_line(remaining);
+	remaining = save_remaining_buffer(remaining);
 	return (line);
 }

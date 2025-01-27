@@ -42,84 +42,84 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *left_str, char *buff)
+char	*ft_strjoin(char *remaining, char *buff)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	if (!left_str)
+	if (!remaining)
 	{
-		left_str = (char *)malloc(1 * sizeof(char));
-		left_str[0] = '\0';
+		remaining = (char *)malloc(1 * sizeof(char));
+		remaining[0] = '\0';
 	}
-	if (!left_str || !buff)
+	if (!remaining || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
+	str = malloc(sizeof(char) * ((ft_strlen(remaining) + ft_strlen(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
 	j = 0;
-	if (left_str)
-		while (left_str[++i] != '\0')
-			str[i] = left_str[i];
+	if (remaining)
+		while (remaining[++i] != '\0')
+			str[i] = remaining[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
-	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
-	free(left_str);
+	str[ft_strlen(remaining) + ft_strlen(buff)] = '\0';
+	free(remaining);
 	return (str);
 }
 
-char	*extract_line(char *left_str)
+char	*extract_line(char *remaining)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	if (!left_str[i])
+	if (!remaining[i])
 		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
+	while (remaining[i] && remaining[i] != '\n')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (remaining[i] && remaining[i] != '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = remaining[i];
 		i++;
 	}
-	if (left_str[i] == '\n')
+	if (remaining[i] == '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = remaining[i];
 		i++;
 	}
 	str[i] = '\0';
 	return (str);
 }
 
-char	*save_remaining_buffer(char *left_str)
+char	*save_remaining_buffer(char *remaining)
 {
 	int		i;
 	int		j;
 	char	*str;
 
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (remaining[i] && remaining[i] != '\n')
 		i++;
-	if (!left_str[i])
+	if (!remaining[i])
 	{
-		free(left_str);
+		free(remaining);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(remaining) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;
 	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
+	while (remaining[i])
+		str[j++] = remaining[i++];
 	str[j] = '\0';
-	free(left_str);
+	free(remaining);
 	return (str);
 }

@@ -20,11 +20,11 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*read_and_append(int fd, char *left_str);
+char	*read_and_append(int fd, char *remaining);
 char	*ft_strchr(char *s, int c);
-char	*ft_strjoin(char *left_str, char *buff);
+char	*ft_strjoin(char *remaining, char *buff);
 size_t	ft_strlen(char *s);
-char	*extract_line(char *left_str);
-char	*save_remaining_buffer(char *left_str);
+char	*extract_line(char *remaining);
+char	*save_remaining_buffer(char *remaining);
 
 #endif
