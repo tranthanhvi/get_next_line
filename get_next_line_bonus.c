@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 10:12:14 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/20 10:04:09 by ajordan-         ###   ########.fr       */
+/*   Created: 2021/09/01 13:17:07 by ajordan-          #+#    #+#             */
+/*   Updated: 2021/10/20 10:04:39 by ajordan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 *	or NULL if error.
 */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 //#include <stdio.h>
 //#include <fcntl.h>
 
-char	*read_and_append(int fd, char *left_str)
+char	*read_and_append(int fd, char *remaining)
 {
 	char	*buff;
 	int		rd_bytes;
@@ -54,7 +54,7 @@ char	*read_and_append(int fd, char *left_str)
 	if (!buff)
 		return (NULL);
 	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
+	while (!ft_strchr(remaining, '\n') && rd_bytes != 0)
 	{
 		rd_bytes = read(fd, buff, BUFFER_SIZE);
 		if (rd_bytes == -1)
@@ -63,24 +63,24 @@ char	*read_and_append(int fd, char *left_str)
 			return (NULL);
 		}
 		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
+		remaining = ft_strjoin(remaining, buff);
 	}
 	free(buff);
-	return (left_str);
+	return (remaining);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*left_str;
+	static char	*remaining[4096];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	left_str = read_and_append(fd, left_str);
-	if (!left_str)
+	remaining[fd] = read_and_append(fd, remaining[fd]);
+	if (!remaining[fd])
 		return (NULL);
-	line = extract_line(left_str);
-	left_str = save_remaining_buffer(left_str);
+	line = extract_line(remaining[fd]);
+	remaining[fd] = save_remaining_buffer	(remaining[fd]);
 	return (line);
 }
 
@@ -91,6 +91,7 @@ char	*get_next_line(int fd)
 	int		fd1;
 	int		fd2;
 	int		fd3;
+
 	fd1 = open("tests/test.txt", O_RDONLY);
 	fd2 = open("tests/test2.txt", O_RDONLY);
 	fd3 = open("tests/test3.txt", O_RDONLY);
