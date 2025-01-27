@@ -12,8 +12,6 @@
 
 #include "get_next_line.h"
 #include <unistd.h>
-//#include <stdio.h>
-//#include <fcntl.h>
 
 char	*read_and_append(int fd, char *left_str)
 {
